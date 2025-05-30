@@ -1,6 +1,6 @@
 # LeadEngineerTraining2025
 
-A 3-month personal training portfolio simulating the responsibilities of a .NET Technical Lead.  
+A personal training portfolio simulating the responsibilities of a .NET Technical Lead.  
 Includes 3 projects with CI/CD, documentation, sprint planning, and RCA samples.
 
 ## Projects
