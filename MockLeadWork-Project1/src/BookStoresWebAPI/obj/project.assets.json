@@ -452,11 +452,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/bootcamp-course4-fullstack-development/BookStoresWebAPI/BookStoresWebAPI.csproj",
+      "projectUniqueName": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/MockLeadWork-Project1/src/BookStoresWebAPI/BookStoresWebAPI.csproj",
       "projectName": "BookStoresWebAPI",
-      "projectPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/bootcamp-course4-fullstack-development/BookStoresWebAPI/BookStoresWebAPI.csproj",
+      "projectPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/MockLeadWork-Project1/src/BookStoresWebAPI/BookStoresWebAPI.csproj",
       "packagesPath": "/Users/mkabhishek/.nuget/packages/",
-      "outputPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/bootcamp-course4-fullstack-development/BookStoresWebAPI/obj/",
+      "outputPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/MockLeadWork-Project1/src/BookStoresWebAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mkabhishek/.nuget/NuGet/NuGet.Config"
