@@ -1,0 +1,5 @@
+Task:
+
+1.AWS Certified Developer Associate playlist (REVISION)
+2. AWS Playlist by Rahul Nath (pick concepts which you think you need to know & 
+                             can relate to some task in your previous experience)

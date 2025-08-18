@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MockLeadWork-Project1", "MockLeadWork-Project1", "{B70FB79C-04AE-EEEF-D644-EE6FC22A7D59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CCD31961-BD10-CD91-C33E-6E8D80CCB279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoresWebAPI", "MockLeadWork-Project1\src\BookStoresWebAPI\BookStoresWebAPI.csproj", "{FE79817D-D6D7-DB57-A7BA-F2F27A6C371C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE79817D-D6D7-DB57-A7BA-F2F27A6C371C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE79817D-D6D7-DB57-A7BA-F2F27A6C371C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE79817D-D6D7-DB57-A7BA-F2F27A6C371C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE79817D-D6D7-DB57-A7BA-F2F27A6C371C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CCD31961-BD10-CD91-C33E-6E8D80CCB279} = {B70FB79C-04AE-EEEF-D644-EE6FC22A7D59}
+		{FE79817D-D6D7-DB57-A7BA-F2F27A6C371C} = {CCD31961-BD10-CD91-C33E-6E8D80CCB279}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB88F85F-C3B8-4995-AA55-711D3871339F}
+	EndGlobalSection
+EndGlobal
