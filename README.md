@@ -1,7 +1,7 @@
 RESEARCH PROJECTS:
 
-1. ASP.NET Core Web API .NET8
-2. .NET Microservices
+1. ASP.NET Core Web API .NET8 (should have project development, github project management/task handling, CI/CD build learning, package deployment deliverable)
+2. .NET Microservices (should have project development, github project management/task handling, CI/CD build learning, package deployment deliverable)
 3. FrontEndDotNetProject: Blazor based(work on this after front end revisit completed)
 
 
