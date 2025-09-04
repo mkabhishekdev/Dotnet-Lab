@@ -1,0 +1,139 @@
+1. 
+dotnet clean // to clean the project
+dotnet build   //to build project
+
+2. dotnet run // to run project
+
+3. dotnet build -warnas:none // to suppress warnings while building
+
+4. dotnet run -warnas:none // to suppress warnings while running
+
+5. To kill a process or terminate
+       - In terminal type: lsof -i :5062
+       - Above will show all the processes which are running
+       - type the below command to kill the process
+             kill -9 <enter the PID here>
+
+6. "async"/"await"
+       - As known, this is used for asynchronous messaging
+       - In simpler words, its like making the data retrieval from database 'faster'. Usually in a call
+         to any database server or even network calls(like in microservices) when the call goes from the 
+         code to these outside servers. Usually since they are external to the code the calls usually will
+         take time. "Async" concept got first introduced into .net and later it spread to other platforms.
+       - Adding "async" to method declaration is the starting point, the actual retrieval logic happens
+         only when the "await" keyword is used in the calls to the database/network servers within the 
+         methods.
+       - When .NET encounters a "await" keyword, it will do something called a 'co-routine' i.e co-routine
+         means you will get back the result in the form of a 'yield' & this will allow the code to interrupt
+         any other processes which are going on. Than it will quickly return -> after that you can go to 
+         your next piece of code.
+       - So add 'await' whenever you are hitting the database (In most situations)
+
+7. Main idea for having Controllers is to "manipulating the URLs" & should never have any calls to database,to allow
+separation of concerns we use the 'Repository pattern' - adding dependency injections using constructors. 99% of the
+time dependency injection is done using constructor overloading.
+
+8. UNDERSTANDING: Singleton vs Scoped vs Transient
+   ************************************************
+
+  RESTAURANT PLATE EXAMPLE(Analogy):
+
+  🍽 Scoped (plate of food per request)
+
+    - Each customer (HTTP request) gets one plate.
+    - During your meal (whole request), the same plate is used.
+    - When a new customer arrives (new request), a new plate is given.
+  👉 This is how DbContext usually works in ASP.NET Core.
+
+  🍽 Singleton (one plate for the whole restaurant)
+
+    - Imagine the restaurant has only one plate in the entire building.
+    - Every customer, no matter when they come, eats from that same single plate.
+    - The plate never changes until the restaurant shuts down.
+  👉 That’s how a Singleton service works — one instance for the whole app lifetime.
+
+  🍽 Transient (new plate every time you ask)
+
+    - Every time you ask the waiter for something, you get a brand new plate, even in the middle of your meal.
+    - If you ask 5 times during one meal → you’ll get 5 plates.
+    - Each request, each usage → always a new plate.
+  👉 That’s how a Transient service works — always a fresh instance.
+
+  CODE Example:
+    
+    1. Define Services
+        
+      public interface IPlateService
+      {
+          Guid PlateId { get; }
+      }
+
+      public class PlateService : IPlateService
+      {
+          public Guid PlateId { get; } = Guid.NewGuid();
+      }
+
+    
+    2. Register Services in Program.cs
+      
+      var builder = WebApplication.CreateBuilder(args);
+
+      // One plate for the entire restaurant (singleton)
+      builder.Services.AddSingleton<IPlateService, PlateService>();
+
+      // One plate per customer/request (scoped) [NOTE: Each customer is like each request]
+      builder.Services.AddScoped<IPlateService, PlateService>();
+
+      // New plate every time you ask (transient)
+      builder.Services.AddTransient<IPlateService, PlateService>();
+
+      var app = builder.Build();
+
+      app.MapGet("/plate", (IPlateService singleton, IPlateService scoped, IPlateService transient1, IPlateService transient2) =>
+      {
+        return new
+        {
+          Singleton = singleton.PlateId,
+          Scoped = scoped.PlateId,
+          Transient1 = transient1.PlateId,
+          Transient2 = transient2.PlateId
+        };
+      });
+
+      app.Run();
+
+   3. What Happens When You Hit /plate
+
+   👉 First HTTP request (Customer 1):
+
+   {
+    "Singleton": "aaa111",   // same forever
+    "Scoped": "bbb222",      // same for this request
+    "Transient1": "ccc333",  // new each injection
+    "Transient2": "ddd444"   // new each injection
+   }
+
+
+   👉 Second HTTP request (Customer 2):
+
+   {
+    "Singleton": "aaa111",   // still same (one plate for restaurant)
+    "Scoped": "eee555",      // new plate for new customer
+    "Transient1": "fff666",  // new every time
+    "Transient2": "ggg777"   // new every time
+   }
+
+   🔑 What you see
+
+   Singleton → Same across all requests.
+   Scoped → Same within one request, but changes across requests.
+   Transient → Always new, even inside the same request.
+
+   
+9. In WebAPI development, think of Program.cs file for analogy as the back side of a T.V, until you plug in the connections
+   to the back side of a TV, TV will not work. Similarly, until you plugin services you need in the Program.cs file, your
+   application will not work as you expected.
+
+
+10. dotnet watch run vs dotnet run?
+         
