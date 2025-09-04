@@ -6,7 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using api.Data;
 using api.Mappers;
 using api.Dtos.Stock;
+using Microsoft.EntityFrameworkCore;
+using api.Repository;
 
+/* Main idea for having Controllers is to manipulating the URLs & should never have any calls to database, to allow
+separation of concerns we use the 'Repository pattern' - adding dependency injections using constructors. 99% of the
+time dependency injection is done using constructor overloading
+*/
 namespace api.Controllers
 {
 
@@ -15,25 +21,27 @@ namespace api.Controllers
     public class StockController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
-
-        public StockController(ApplicationDBContext applicationDBContext)
+        private readonly IStockRepository _stockRepo;
+        public StockController(ApplicationDBContext applicationDBContext, StockRepository stockRepo)
         {
+            _stockRepo = stockRepo;
             _context = applicationDBContext;
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var stocks = _context.Stocks.ToList()
-              .Select(s => s.ToStockDto());
+            var stocks = await _stockRepo.GetAllAsync();
+
+            var stockDto = stocks.Select(s => s.ToStockDto());
 
             return Ok(stocks);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var stock = _context.Stocks.Find(id);
+            var stock = await _context.Stocks.FindAsync(id);
 
             if (stock == null)
             {
@@ -43,15 +51,56 @@ namespace api.Controllers
             return Ok(stock.ToStockDto());
         }
 
+        //REMEMBER: POST = CREATE, PUT = UPDATE in simpler terms
         [HttpPost]
-        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+        public async Task<IActionResult> Create([FromBody] CreateStockRequestDto stockDto)
         {
             var stockModel = stockDto.ToStockFromCreateDto();
-            _context.Stocks.Add(stockModel);
-            _context.SaveChanges();
+            await _context.Stocks.AddAsync(stockModel);
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = stockModel.Id }, stockModel.ToStockDto());
         }
 
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDto updateDto)
+        {
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (stockModel == null)
+            {
+                return NotFound();
+            }
+
+            stockModel.Symbol = updateDto.Symbol;
+            stockModel.CompanyName = updateDto.CompanyName;
+            stockModel.Purchase = updateDto.Purchase;
+            stockModel.LastDividend = updateDto.LastDividend;
+            stockModel.Industry = updateDto.Industry;
+            stockModel.MarketCap = updateDto.MarketCap;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(stockModel.ToStockDto);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var toDeleteStock = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (toDeleteStock == null)
+            {
+                return NotFound();
+            }
+
+            _context.Stocks.Remove(toDeleteStock); //'await' cannot be added here though you are hitting the database, Remove seems to be not a async function
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
 
     }
 

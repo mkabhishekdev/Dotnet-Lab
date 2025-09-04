@@ -15,6 +15,8 @@ Program.cs file you cannot expect the application project to work  */
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.services.AddScoped(IStockrepository, StockRepository);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
