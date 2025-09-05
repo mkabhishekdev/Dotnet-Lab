@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using api.Data; // <-- so Program.cs can see ApplicationDbContext
+using api.Data;
+using api.Interfaces;
+using api.Repository; // <-- so Program.cs can see ApplicationDbContext
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +17,8 @@ Program.cs file you cannot expect the application project to work  */
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.services.AddScoped(IStockrepository, StockRepository);
+builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 var app = builder.Build();
 

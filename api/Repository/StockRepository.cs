@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Interfaces;
 using api.Data;
+using api.Models;
+using Microsoft.EntityFrameworkCore;
+using api.Dtos.Stock;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace api.Repository
 {
@@ -15,12 +19,53 @@ namespace api.Repository
             _applicationDBContext = dBContext;
         }
 
-        public Task<List<Stock>> GetAllAsync()
+        public async Task<Stock> CreateAsync(Stock stockModel)
         {
-            return _applicationDBContext.Stocks.ToListAsync();
+            await _applicationDBContext.Stocks.AddAsync(stockModel);
+            await _applicationDBContext.SaveChangesAsync();
+            return stockModel;
         }
 
+        public async Task<Stock?> DeleteAsync(int id)
+        {
+            var stockModel = await _applicationDBContext.Stocks.FirstOrDefaultAsync(x => x.Id == id);
+            if (stockModel == null)
+            {
+                return null;
+            }
+            _applicationDBContext.Stocks.Remove(stockModel);//'await' cannot be added here though you are hitting the database, Remove seems to be not a async function
+            await _applicationDBContext.SaveChangesAsync();
+            return stockModel;
+        }
 
-        
+        public async Task<List<Stock>> GetAllAsync()
+        {
+            return await _applicationDBContext.Stocks.ToListAsync();
+        }
+
+        public async Task<Stock?> GetByIdAsync(int id)
+        {
+            return await _applicationDBContext.Stocks.FindAsync(id);
+        }
+
+        public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto updateStockRequestDto)
+        {
+            var updateStockModel = await _applicationDBContext.Stocks.FirstOrDefaultAsync(x => x.Id == id);
+            if (updateStockModel == null)
+            {
+                return null;
+            }
+
+            updateStockModel.Symbol = updateStockRequestDto.Symbol;
+            updateStockModel.CompanyName = updateStockRequestDto.CompanyName;
+            updateStockModel.Purchase = updateStockRequestDto.Purchase;
+            updateStockModel.LastDividend = updateStockRequestDto.LastDividend;
+            updateStockModel.Industry = updateStockRequestDto.Industry;
+            updateStockModel.MarketCap = updateStockRequestDto.MarketCap;
+
+            await _applicationDBContext.SaveChangesAsync();
+            return updateStockModel;
+
+        }
     }
 }

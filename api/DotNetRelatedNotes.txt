@@ -136,4 +136,116 @@ time dependency injection is done using constructor overloading.
 
 
 10. dotnet watch run vs dotnet run?
+    ********************************
+
+    🔹 dotnet run
+
+         - Compiles and runs the application once.
+
+         - If you change code, you must stop (Ctrl+C) and run again.
+
+         👉 Example:
+
+               dotnet run
+               Starts your app.
+               If you edit a controller or class → you must re-run to see changes.
+
+    
+    🔹 dotnet watch run
+
+        - Compiles and runs the application, then keeps watching your code files.
+
+        - If you change code (C#, csproj, etc.), it automatically rebuilds and restarts the app.
+
+        - Supports Hot Reload (in .NET 6+), meaning many changes apply instantly without restarting.
+
+        👉 Example:
+
+           dotnet watch run
+           Starts your app.
+           If you edit a method in a controller → app reloads immediately (no manual stop/start).
+
+    
+    🔑 Real-Life Analogy
+
+         - dotnet run → Like playing a movie file. If you edit the file, you have to stop and play again.
+         - dotnet watch run → Like watching a movie while the director updates scenes live — you see the changes immediately.
+
+
+      📝 When to use
+
+         - dotnet run → production-style runs, one-time testing.
+         - dotnet watch run → development, when you’re coding and want fast feedback without restarting manually.
          
+
+   - In development, you can just start:
+
+           dotnet watch run
+            and leave it running.
+
+     Then:
+
+        - Every time you save a file (.cs, .cshtml, .razor, etc.) →
+         dotnet watch detects the change.
+
+        - It tries to apply Hot Reload (for supported changes).
+
+        - If Hot Reload isn’t possible (e.g., you add a new class constructor signature), then it will rebuild and restart the app automatically.
+
+
+      🔑 What Hot Reload can usually handle (no restart):
+
+          - Change method bodies.
+          - Change property getters/setters.
+          - Change Razor/Blazor markup.
+          - Update local variables and statements.
+
+      
+      🔑 What forces a restart:
+
+         - Changing method signatures (parameters/return type).
+         - Adding/removing classes or namespaces.
+         - Editing Program.cs startup pipeline significantly.
+         - Changing project files (.csproj).
+
+      
+      💡 Workflow in practice
+
+         - Run dotnet watch run once in the morning.
+         - Keep coding → each save updates your running app.
+         - You don’t need to restart manually unless you stop coding for the day.
+
+   
+   🔹 What happens with dotnet watch run
+
+         - When you run dotnet watch run, your app is running in memory just like dotnet run.
+         - On top of that, the watcher process monitors your source files.
+         - If a file changes → it triggers Hot Reload or a rebuild + restart.
+         - If nothing changes → it just sits idle, consuming very little CPU (mostly sleeping).
+
+   
+   🔹 Memory usage
+
+        - The memory being used is basically:
+        - Your application running in memory (same as dotnet run).
+        - A lightweight watch process (file system watcher).
+      💡 So when you’re not coding, the watcher isn’t actively burning resources — it’s waiting. The memory usage is almost the same as if you had started your app with dotnet run.
+
+
+   🔹 Should you leave it running?
+
+        - During development → yes, it’s convenient to leave dotnet watch run running while you’re coding, since every save updates your app.
+        - If you step away for a long time (e.g., lunch break, end of day) → it’s fine to stop it (Ctrl+C) to free up memory and database connections.
+
+    
+    🔑 Analogy
+
+        - Think of it like a car engine idling:
+        - While you’re actively driving (coding), it’s very handy.
+        - If you’re parked for a long time (not coding), you can turn it off to save fuel (memory/resources).
+
+    
+    ✅ So:
+
+        - No, it’s not wasteful while you’re coding.
+        - If you’re done coding for a while → better to stop it.
