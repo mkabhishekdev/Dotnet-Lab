@@ -11,13 +11,12 @@ namespace api.Repository
 {
     public class CommentRepository : ICommentRepository
     {
-        private readonly ICommentRepository _commentRepo;
+
         private readonly ApplicationDBContext _applicationDbContext;
 
-        public CommentRepository(ApplicationDBContext dbContext, ICommentRepository commentRepository)
+        public CommentRepository(ApplicationDBContext dbContext)
         {
             _applicationDbContext = dbContext;
-            _commentRepo = commentRepository;
         }
 
         public async Task<List<Comment>> GetAllAsync()
@@ -25,6 +24,9 @@ namespace api.Repository
             return await _applicationDbContext.Comments.ToListAsync();
         }
 
-        
+        public async Task<Comment?> GetByIdAsync(int id)
+        {
+            return await _applicationDbContext.Comments.FindAsync(id);
+        }
     }
 }

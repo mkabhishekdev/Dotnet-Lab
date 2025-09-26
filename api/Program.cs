@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Interfaces;
-using api.Repository; // <-- so Program.cs can see ApplicationDbContext
+using api.Repository;
+using Microsoft.Extensions.Options; // <-- so Program.cs can see ApplicationDbContext
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
+
 
 /* Here is where you are adding the created db connection, Program.cs is like back of a TV, without plugging in the 
 wire connections behind the TV, you can expect the TV to operate. In the same way, without adding the services in the 
