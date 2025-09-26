@@ -249,3 +249,12 @@ time dependency injection is done using constructor overloading.
 
         - No, it’s not wasteful while you’re coding.
         - If you’re done coding for a while → better to stop it.
+
+11. 'Include' in linq statements
+        Example:
+                
+        public async Task<List<Stock>> GetAllAsync()
+        {
+            return await _applicationDBContext.Stocks.Include(c => c.Comments).ToListAsync();
+        } // this includes comments data in Stocks
+
