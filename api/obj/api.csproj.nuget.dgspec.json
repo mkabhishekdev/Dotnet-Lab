@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/api/api.csproj": {}
+    "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/Dotnet-Lab/api/api.csproj": {}
   },
   "projects": {
-    "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/api/api.csproj": {
+    "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/Dotnet-Lab/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/api/api.csproj",
+        "projectUniqueName": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/Dotnet-Lab/api/api.csproj",
         "projectName": "api",
-        "projectPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/api/api.csproj",
+        "projectPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/Dotnet-Lab/api/api.csproj",
         "packagesPath": "/Users/mkabhishek/.nuget/packages/",
-        "outputPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/dotnet-lead-lab/api/obj/",
+        "outputPath": "/Users/mkabhishek/Desktop/Repo/BOOTCAMP/Dotnet-Lab/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mkabhishek/.nuget/NuGet/NuGet.Config"
@@ -45,7 +45,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
