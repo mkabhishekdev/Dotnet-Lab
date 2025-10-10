@@ -1,4 +1,3 @@
-# .gitignore (minimal for .NET + VS Code)
 bin/
 obj/
 .vscode/
