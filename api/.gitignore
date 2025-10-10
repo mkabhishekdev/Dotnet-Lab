@@ -1,0 +1,12 @@
+# .gitignore (minimal for .NET + VS Code)
+bin/
+obj/
+.vscode/
+*.user
+*.suo
+*.log
+*.pdb
+artifacts/
+publish/
+.DS_Store
+Thumbs.db
