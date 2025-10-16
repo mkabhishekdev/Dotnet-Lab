@@ -258,3 +258,16 @@ time dependency injection is done using constructor overloading.
             return await _applicationDBContext.Stocks.Include(c => c.Comments).ToListAsync();
         } // this includes comments data in Stocks
 
+
+12.  Usage of 'static' and 'this' can make a method be called in another class directly (provided you have included the 
+namespace in header files)
+     Ex: 
+        public static Comment ToCommentFromUpdate(this UpdateCommentRequestDto commentDto)
+        {
+            return new Comment
+            {
+                Title = commentDto.Title,
+                Content = commentDto.Content
+            };
+        }
+
