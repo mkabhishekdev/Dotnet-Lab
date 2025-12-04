@@ -24,20 +24,20 @@ namespace api.Data
         {
             base.OnModelCreating(builder);
 
-            List<IdentityRole> roles = new List<IdentityRole>
+            builder.Entity<IdentityRole>().HasData(
+            new IdentityRole
             {
-                new IdentityRole
-                {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                },
-                new IdentityRole
-                {
-                    Name = "User",
-                    NormalizedName = "USER"
-                }
-            };
-            builder.Entity<IdentityRole>().HasData(roles);
+                Id = "a80d5b19-48cf-41f9-bcf2-edd5dad211c3", 
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            },
+            new IdentityRole
+            {
+                Id = "37a2dda2-48b0-46c9-9403-4d3176d96b12", 
+                Name = "User",
+                NormalizedName = "USER"
+            }
+            );
         }
 
     }
