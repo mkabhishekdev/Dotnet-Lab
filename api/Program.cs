@@ -6,7 +6,8 @@ using Microsoft.Extensions.Options;
 using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens; // <-- so Program.cs can see ApplicationDbContext
+using Microsoft.IdentityModel.Tokens;
+using api.Service; // <-- so Program.cs can see ApplicationDbContext
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -65,6 +66,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
