@@ -1,0 +1,8 @@
+1. JS is the language of the browser/client. You can absolutely develop a website with just html/css, but when do you need 
+  javascript than? - lets say you want to do form validation, alerts etc(interactive things).
+
+2. var(globally scoped), let (block-level scope), const (block-level scope)
+
+3. Primitive data types means the data of this types are directly assigned to the memory
+   They are: String, Numbers, Boolean, null, undefined, Symbol
+
