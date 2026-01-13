@@ -28,17 +28,47 @@ const todos = [
         isCompleted: true
     }
 ];
-console.log(todos);
-console.log(todos[1]);
+
+for(let i = 0; i < todos.length; i++)
+{
+    console.log(todos[i].text);
+}
+
+// forEach, map, filter
+todos.forEach(function(todo){
+    console.log(todo.text);
+})
+
+
+const todoText = todos.map(function(todo){
+                    return todo.text;
+                });
+console.log(todoText);
+
+const todoFilter = todos.filter(function(todo){
+                      return todo.isCompleted == true;
+}).map(function(todo){
+    return todo.text;
+})
+console.log(todoFilter);
+
 
 const todoJSON = JSON.stringify(todos);
 console.log(todoJSON);
 
 // for loop
-
 for(let i = 0; i < 3; i++)
 {
-    console.log(i);
+    console.log(`For loop number: ${i}`);
 }
 
- 
+// while
+let i = 0;
+while( i < 10)
+{
+    console.log(`while loop: ${i}`);
+    i++;
+} 
+
+
+
