@@ -70,5 +70,43 @@ while( i < 10)
     i++;
 } 
 
+const x = 4;
+const y = 10;
+
+if(x === 10)
+{
+    console.log('x is 10');
+}
+else
+{
+    console.log('x is not 10');
+}
+
+const z = 12;
+const color = z > 10 ? 'blue':'yellow';
+console.log(color);
+
+switch(color)
+{
+    case 'red':
+        console.log("hey its red color");
+        break;
+    case 'blue':
+        console.log("Jai Bhim, its blue");
+        break;
+    default:
+        console.log('color is not red or blue');
+        break;
+}
+
+//functions
+
+function addNums(num1, num2)
+{
+    console.log(num1+num2);
+}
+
+addNums(11,9);
+
 
 
