@@ -6,3 +6,27 @@
 3. Primitive data types means the data of this types are directly assigned to the memory
    They are: String, Numbers, Boolean, null, undefined, Symbol
 
+4. Difference between "===" and "=="
+   Ex:
+      const x = '10';
+
+      if(x === 10)
+      {
+          console.log('x is 10');
+      }
+    
+    * when we use "===" it will try to match the datatype. In the above case
+      it wouldn't print the condition inside if since '10' is not int.
+
+5. Functions
+   Ex: 
+      function addNums(num1, num2)
+      {
+          console.log(num1 + num2);
+      }
+    - The above function can also be return has:
+      ES6(aka ES2015) arrow functions were introduced:
+      const addNums = (nums1, nums) =>
+      {
+        console.log(num1 + num2);
+      }
