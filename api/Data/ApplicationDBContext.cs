@@ -20,9 +20,25 @@ namespace api.Data
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<UserStock> UserStocks{ get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            //Composite primary key: A UserStock row is uniquely identified by BOTH UserId and StockId together.
+            builder.Entity<UserStock>(x => x.HasKey(p => new { p.AppUserId, p.StockId }));
+
+            //UserStock has one AppUser ,An AppUser has many UserStocks, The link is done using AppUserId
+            builder.Entity<UserStock>()
+              .HasOne(u => u.AppUser)
+              .WithMany(u => u.UserStocks)
+              .HasForeignKey(p => p.AppUserId);
+              
+            builder.Entity<UserStock>()
+              .HasOne(u => u.Stock)
+              .WithMany(u => u.UserStocks)
+              .HasForeignKey(p => p.StockId);
 
             builder.Entity<IdentityRole>().HasData(
             new IdentityRole

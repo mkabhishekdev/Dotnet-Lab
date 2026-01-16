@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using api.Repository;
 using api.Interfaces;
 using api.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 /* Main idea for having Controllers is to manipulating the URLs & should never have any calls to database, to allow
 separation of concerns we use the 'Repository pattern' - adding dependency injections using constructors. 99% of the
@@ -31,6 +32,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery]QueryObject query)
         {
             if (!ModelState.IsValid)
