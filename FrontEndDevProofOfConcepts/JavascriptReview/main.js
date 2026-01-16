@@ -105,8 +105,44 @@ function addNums(num1, num2)
 {
     console.log(num1+num2);
 }
-
 addNums(11,9);
+
+//OOP in JS
+
+// Constructor function
+function Person(firstName, lastName, dob)
+{
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.dob = new Date(dob);
+    this.getBirthYear = function()
+    {
+        return this.dob.getFullYear();
+    }
+    this.getFullName = function() 
+    {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
+
+// Instantiate object
+const person1 = new Person('John', 'Doe', '4-3-1980');
+console.log(person1);
+
+const person2 = new Person('MK', 'Abhishek', '06-11-1991');
+console.log(person2);
+console.log(person2.getFullName());
+console.log(person2.getBirthYear());
+
+const person3 = new Person('MK', 'Abhilash', '01-05-1997');
+console.log(person3);
+
+
+
+
+
+
 
 
 
