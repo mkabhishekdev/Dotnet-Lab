@@ -93,3 +93,5 @@ person2.introduce(); // I am Kiran
 When person1 calls the function → this becomes person1
 When person2 calls the function → this becomes person2
 
+
+7. ES6= ES2015
