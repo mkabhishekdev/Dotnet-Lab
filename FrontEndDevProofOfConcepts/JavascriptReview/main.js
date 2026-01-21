@@ -168,7 +168,15 @@ const person3 = new Person('MK', 'Abhilash', '01-05-1997');
 console.log(person3);
 
 
+//DOM
 
+console.log(window);
+
+/* Single Element */
+console.log(document.getElementById('my-form'));
+
+
+/* Multiple Element */
 
 
 
