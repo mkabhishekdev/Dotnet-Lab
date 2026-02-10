@@ -38,6 +38,45 @@ namespace api.Controllers
             var userStock = await _userStockRepo.GetUserStock(appUser);
             return Ok(userStock);
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddUserStock(string symbol)
+        {
+            var username = User.GetUsername();
+            var appUser = await _userManager.FindByNameAsync(username);
+            var stock = await _stockRepo.GetBySymbolAsync(symbol);
+
+            if(stock == null)
+            {
+                return BadRequest("Stock not found");
+            }
+
+            var userStock = await _userStockRepo.GetUserStock(appUser);
+
+            if(userStock.Any(e => e.Symbol.ToLower() == symbol.ToLower()))
+            {
+                return BadRequest("Cannot add same stock to portfolio");
+            }
+
+            var userStockModel = new UserStock
+            {
+                StockId =  stock.Id,
+                AppUserId = appUser.Id 
+            };
+
+            await _userStockRepo.CreateAsync(userStockModel);
+
+            if(userStockModel == null)
+            {
+                return StatusCode(500, "Could not create");
+            }
+            else
+            {
+                return Created();
+            }
+
+        }
         
     }
 }

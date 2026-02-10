@@ -9,6 +9,6 @@ namespace api.Interfaces
     public interface IUserStockRepository
     {
         Task<List<Stock>> GetUserStock(AppUser user);
-
+        Task<UserStock> CreateAsync(UserStock userStock);
     }
 }
