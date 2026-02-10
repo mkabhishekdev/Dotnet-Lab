@@ -17,6 +17,13 @@ namespace api.Repository
             _context = context;
         }
 
+        public async Task<UserStock> CreateAsync(UserStock userStock)
+        {
+            await _context.UserStocks.AddAsync(userStock);
+            await _context.SaveChangesAsync();
+            return userStock;
+        }
+
         public async Task<List<Stock>> GetUserStock(AppUser user)
         {
             return await _context.UserStocks.Where(u => u.AppUserId == user.Id)
