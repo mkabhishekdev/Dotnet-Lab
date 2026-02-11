@@ -14,5 +14,6 @@ COMPLETE PROJECT DEVELOPMENT & MANAGEMENT:
 2. Add Test-Framework: XUnit
 3. Create build packages in github
 4. Deploy in github
+5. Simulate this complete project like how you will run a project as a Team Lead
    
    
