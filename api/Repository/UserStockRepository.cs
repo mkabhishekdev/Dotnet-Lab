@@ -24,6 +24,21 @@ namespace api.Repository
             return userStock;
         }
 
+        public async Task<UserStock> DeleteUserStock(AppUser appUser, string symbol)
+        {
+            var userStockModel = await _context.UserStocks.FirstOrDefaultAsync(x => x.AppUserId == appUser.Id && x.Stock.Symbol.ToLower() == symbol.ToLower());
+
+            if(userStockModel == null)
+            {
+                return null;
+            }
+
+            _context.UserStocks.Remove(userStockModel);
+            await _context.SaveChangesAsync();
+            return userStockModel;
+        }
+         
+
         public async Task<List<Stock>> GetUserStock(AppUser user)
         {
             return await _context.UserStocks.Where(u => u.AppUserId == user.Id)
