@@ -10,5 +10,6 @@ namespace api.Interfaces
     {
         Task<List<Stock>> GetUserStock(AppUser user);
         Task<UserStock> CreateAsync(UserStock userStock);
+        Task<UserStock> DeleteUserStock(AppUser appUser, string symbol);
     }
 }
