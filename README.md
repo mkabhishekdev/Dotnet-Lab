@@ -6,7 +6,7 @@ RESEARCH PROJECT:
 BACK-END: C#, .NET Core Web API 8 (.NET 8)
 FRONT-END: ReactJS + Typescript
 DATABASE: MS-SQL in Docker container
-AI tools as productivity accelerators: OpenAI Codex
+
 
 
 
