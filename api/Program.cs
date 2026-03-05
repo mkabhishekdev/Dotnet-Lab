@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using api.Service;
-using Microsoft.OpenApi.Models; // <-- so Program.cs can see ApplicationDbContext
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.WebUtilities; // <-- so Program.cs can see ApplicationDbContext
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -101,6 +102,9 @@ builder.Services.AddScoped<IUserStockRepository, UserStockRepository>();
 builder.Services.AddScoped<IFMPService, FMPService>();
 builder.Services.AddHttpClient<IFMPService, FMPService>();
 
+/* THE SEQUENCE OF ORDER BELOW IS IMPORTANT, i.e: THE MIDDLEWARE CALLS GO THROUGH THAT ORDER, SO HAVING THE ORDER
+WE WANT IS IMPORTANT*/
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -111,6 +115,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x => x
+      .AllowAnyMethod()
+      .AllowAnyHeader()
+      .AllowCredentials()
+      // .WithOrigins("https://localhost:44351))
+      .SetIsOriginAllowed(origin => true));
 
 app.UseAuthentication();
 app.UseAuthorization();
