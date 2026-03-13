@@ -1,11 +1,8 @@
 RESEARCH PROJECT:
 ------------------
 
-"ASP.NET Core Web API .NET8 + (ReactJS + Typescript) PROJECT" 
+"ASP.NET Core Web API .NET8 + MS-SQL in Docker container PROJECT" 
 
-BACK-END: C#, .NET Core Web API 8 (.NET 8)
-DATABASE: MS-SQL in Docker container
-FRONT-END: ReactJS + Typescript
 
 
 
